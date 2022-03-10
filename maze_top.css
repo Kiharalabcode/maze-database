@@ -1,0 +1,48 @@
+.footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 60px;
+    text-align: right;
+}
+
+body>.container {
+    padding-top: 60px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 100px;
+}
+
+.container .text-muted {
+    margin: 20px 0;
+}
+
+.footer>.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: 0;
+}
+
+.topimg {
+    width: auto;
+}
+
+#image_div {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.card {
+    margin-bottom:20px;
+}
+
+.param_table {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.maze_target {
+    padding-left: 30%;
+    padding-right: 30%;
+}

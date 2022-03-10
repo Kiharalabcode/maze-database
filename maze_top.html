@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maze System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
+        integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="./maze_top.css">
+</head>
+
+<body>
+    <header>
+        <img src="./image/labyrinth-g1ad962d64_1920.jpg" class="img-fluid" style="pointer-events: none;">
+    </header>
+
+    <div class="container">
+        <h1 class="text-center">Maze System</h1>
+
+        <div class="maze_target">
+            <h3 class="text-center">各サイズの迷路一覧</h3>
+
+            <div class="text-center"><a href="./maze_list.html">迷路一覧へ</a></div>
+        </div>
+
+        <div class="maze_target">
+            <h3 class="text-center">対象とする迷路</h3>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">正解の経路は1通り（完全迷路）</li>
+                <li class="list-group-item">ループ（閉路）は含まれない</li>
+                <li class="list-group-item">到達できない道は存在しない</li>
+                <li class="list-group-item">偶数行目かつ偶数列目は壁、奇数行目かつ奇数列目は道</li>
+                <li class="list-group-item">スタート：左上（1, 1）</li>
+                <li class="list-group-item">ゴール：右下（size-2, size-2）</li>
+            </ul>
+        </div>
+
+        <div class="param_table">
+            <h3 class="text-center">迷路の特徴量とその意味</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>パラメータ名</td>
+                        <td>説明</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Generation Algorithm</td>
+                        <td>迷路を生成したアルゴリズム</td>
+                    </tr>
+                    <tr>
+                        <td>turn_num</td>
+                        <td>政界の経路中の曲がり角の数</td>
+                    </tr>
+                    <tr>
+                        <td>L_num</td>
+                        <td>スタートからゴールへ行く方向に対して左側の領域へ延びの間違った道の本数</td>
+                    </tr>
+                    <tr>
+                        <td>L_size</td>
+                        <td>スタートからゴールへ行く方向に対して左側の領域へ延びの間違った道の合計の長さ</td>
+                    </tr>
+                    <tr>
+                        <td>L_size_std</td>
+                        <td>スタートからゴールへ行く方向に対して左側の領域へ延びの間違った道の長さの標準偏差</td>
+                    </tr>
+                    <tr>
+                        <td>R_num</td>
+                        <td>スタートからゴールへ行く方向に対して右側の領域へ延びの間違った道の本数</td>
+                    </tr>
+                    <tr>
+                        <td>R_size</td>
+                        <td>スタートからゴールへ行く方向に対して右側の領域へ延びの間違った道の合計の長さ</td>
+                    </tr>
+                    <tr>
+                        <td>R_size_std</td>
+                        <td>スタートからゴールへ行く方向に対して右側の領域へ延びの間違った道の長さの標準偏差</td>
+                    </tr>
+                    <tr>
+                        <td>boader_l</td>
+                        <td>入口が異なる間違った道が隣接する長さ</td>
+                    </tr>
+                    <tr>
+                        <td>neighbor_sum</td>
+                        <td>入口が異なる間違った道が隣接する数</td>
+                    </tr>
+                    <tr>
+                        <td>correct_path_len</td>
+                        <td>正解の経路の長さ</td>
+                    </tr>
+                    <tr>
+                        <td>turn_pos_num</td>
+                        <td>迷路全体の曲がり角の数</td>
+                    </tr>
+                    <tr>
+                        <td>dead_end_num</td>
+                        <td>迷路全体の行き止まりの数</td>
+                    </tr>
+                    <tr>
+                        <td>T_num</td>
+                        <td>迷路全体のT字路の数</td>
+                    </tr>
+                    <tr>
+                        <td>cross_num</td>
+                        <td>迷路全体の十字路の数</td>
+                    </tr>
+                    <tr>
+                        <td>straight_len_std</td>
+                        <td>迷路全体の直線の長さの標準偏差</td>
+                    </tr>
+                    <tr>
+                        <td>straight_num</td>
+                        <td>迷路全体の直線の本数</td>
+                    </tr>
+                    <tr>
+                        <td>goal_depth</td>
+                        <td>迷路を木とした時のゴールの深さ</td>
+                    </tr>
+                    <tr>
+                        <td>depth_std</td>
+                        <td>迷路を木とした時の行き止まりの深さの標準偏差</td>
+                    </tr>
+                    <tr>
+                        <td>depth_max</td>
+                        <td>迷路を木とした時の最大の深さ</td>
+                    </tr>
+                    <tr>
+                        <td>depth_mean</td>
+                        <td>迷路を木とした時の行き止まりの深さの平均値</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="maze_images">
+            <div class="row row-cols-3 justify-content-evenly">
+                <div class="col">
+                    <div class="card text-center">
+                        <img src="./maze_system_imagedata/origin_maze/origin_maze_W19H19S1,1E17,17M_-0k6hXlF7Qol8S-o9B-sk1OKTXpP_.png"
+                            class="card-img-top" id="image_div">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">説明文</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-center">
+                        <img src="./maze_system_imagedata/origin_maze/origin_maze_W19H19S1,1E17,17M_-0k6hXlF7Qol8S-o9B-sk1OKTXpP_.png"
+                            class="card-img-top" id="image_div">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">説明文</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-center">
+                        <img src="./maze_system_imagedata/origin_maze/origin_maze_W19H19S1,1E17,17M_-0k6hXlF7Qol8S-o9B-sk1OKTXpP_.png"
+                            class="card-img-top" id="image_div">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">説明文</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-center">
+                        <img src="./maze_system_imagedata/origin_maze/origin_maze_W19H19S1,1E17,17M_-0k6hXlF7Qol8S-o9B-sk1OKTXpP_.png"
+                            class="card-img-top" id="image_div">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">説明文</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-center">
+                        <img src="./maze_system_imagedata/origin_maze/origin_maze_W19H19S1,1E17,17M_-0k6hXlF7Qol8S-o9B-sk1OKTXpP_.png"
+                            class="card-img-top" id="image_div">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">説明文</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-center">
+                        <img src="./maze_system_imagedata/origin_maze/origin_maze_W19H19S1,1E17,17M_-0k6hXlF7Qol8S-o9B-sk1OKTXpP_.png"
+                            class="card-img-top" id="image_div">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">説明文</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-center">
+                        <img src="./maze_system_imagedata/origin_maze/origin_maze_W19H19S1,1E17,17M_-0k6hXlF7Qol8S-o9B-sk1OKTXpP_.png"
+                            class="card-img-top" id="image_div">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">説明文</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-center">
+                        <img src="./maze_system_imagedata/origin_maze/origin_maze_W19H19S1,1E17,17M_-0k6hXlF7Qol8S-o9B-sk1OKTXpP_.png"
+                            class="card-img-top" id="image_div">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">説明文</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-center">
+                        <img src="./maze_system_imagedata/origin_maze/origin_maze_W19H19S1,1E17,17M_-0k6hXlF7Qol8S-o9B-sk1OKTXpP_.png"
+                            class="card-img-top" id="image_div">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">説明文</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer bg-dark">
+        <div class="container">
+            <p class="text-muted text-white">Kihara Lab. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="./maze_top.js"></script>
+</body>
+
+</html>

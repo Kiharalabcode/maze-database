@@ -1,0 +1,38 @@
+.footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 60px;
+    text-align: right;
+}
+
+body>.container {
+    padding-top: 60px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 60px;
+}
+
+.container .text-muted {
+    margin: 20px 0;
+}
+
+.footer>.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: 0;
+}
+
+#card_div {
+    margin-bottom:20px;
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+#image_div {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
