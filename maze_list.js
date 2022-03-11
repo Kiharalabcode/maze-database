@@ -24,7 +24,8 @@ function show_maze_list(data) {
         var col_div = document.createElement("div");
         col_div.classList.add("col");
 
-        let base64 = dataString[i].split(',')[1].slice(1) + ',' + dataString[i].split(',')[2] + ',' + dataString[i].split(',')[3].slice(0, -2);
+        let base64 = dataString[i].split(',')[1];
+        console.log(base64);
         var new_button = document.createElement('button');
         let url = "maze_detail.html?num=" + base64 + "&code=" + i;
         new_button.onclick = function () {

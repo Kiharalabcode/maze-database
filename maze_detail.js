@@ -70,7 +70,7 @@ function show_maze_image(num) {
     newimg.width = 300;
     newimg.height = 300;
     bd_div.appendChild(newimg);
-
+    /*
     var newimg = document.createElement("img");
     newimg.src = "./maze_system_imagedata/red_arrow_maze/red_arrow_maze_" + num + ".png";
     newimg.width = 300;
@@ -88,12 +88,12 @@ function show_maze_image(num) {
     newimg.width = 300;
     newimg.height = 300;
     bd_div.appendChild(newimg);
-
-    var newimg = document.createElement("img");
-    newimg.src = "./maze_system_imagedata/tree_graph/tree_graph_" + num + ".png";
+*/
+    //var newimg = document.createElement("img");
+    //newimg.src = "./maze_system_imagedata/tree_graph/tree_graph_" + num + ".png";
     // newimg.width=280;
     // newimg.height=300;
-    bd_div.appendChild(newimg);
+    //bd_div.appendChild(newimg);
 }
 
 function show_maze_graph(data) {
