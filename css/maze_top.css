@@ -24,11 +24,11 @@ body>.container {
     margin-right: 0;
 }
 
-.topimg {
+/* .topimg {
     width: auto;
-}
+} */
 
-#image_div {
+.maze_image_cards> #maze_image {
     margin-top: 20px;
     margin-bottom: 10px;
 }
@@ -38,11 +38,25 @@ body>.container {
 }
 
 .param_table {
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 20%;
+    padding-right: 20%;
+    margin-bottom: 40px;
 }
 
 .maze_target {
     padding-left: 30%;
     padding-right: 30%;
+    margin-bottom: 40px;
+}
+
+.maze_list_links {
+    margin-bottom: 40px;
+}
+
+.easy_search {
+    background-color: rgba(128, 128, 128, 0.6);;
+    opacity: 0.6;
+    margin-bottom: 40px;
+    margin-left: 20%;
+    margin-right: 20%;
 }
