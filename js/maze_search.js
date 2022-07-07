@@ -1,4 +1,4 @@
-function createSlider(){
+function createSearchBox(){
     var column_names_jp = {
         "1次的な特徴量": ["直線のマス数", "T字路のマス数", "十字路のマス数", "曲がり角のマス数", "行き止まりのマス数"],
         "2次的な特徴量": [/*"直線の長さ"*/, "直線の長さの標準偏差",
@@ -12,6 +12,12 @@ function createSlider(){
     search_box_div = document.getElementById("search_box")
 
     for (var key in column_names_jp){
+        feature_category_name_h2 = document.createElement("h2")
+        feature_category_name_h2.classList.add("text-center")
+        feature_category_name_h2.classList.add("feature_category_name")
+        feature_category_name_h2.innerText = key
+        search_box_div.appendChild(feature_category_name_h2)
+
         for (var i in column_names_jp[key]){
             row_div = document.createElement("div")
             row_div.classList.add('row')
@@ -62,6 +68,11 @@ function createSlider(){
             search_box_div.appendChild(row_div)
         }
     }
+    search_button = document.createElement("button")
+    search_button.type = "button"
+    search_button.innerText = "検索"
+    search_button.classList.add("search_button")
+    search_box_div.appendChild(search_button)
 }
 
-createSlider()
+createSearchBox()
