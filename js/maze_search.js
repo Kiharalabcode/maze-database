@@ -66,6 +66,7 @@ function createSearchBox(){
 
             name_p = document.createElement("p")
             name_p.classList.add("feature_name")
+            name_p.classList.add("text-center")
             name_p.innerText = column_names_jp[key][i]
 
             col_slider_div = document.createElement("div")
