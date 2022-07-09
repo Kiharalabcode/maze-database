@@ -24,3 +24,30 @@ body>.container {
     padding-left: 15px;
     margin-right: 0;
 }
+
+.feature_name {
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+
+.slider_div {
+    padding-top: 10px;
+    margin-right: 20px;
+}
+
+.search_box {
+    background-color: rgba(128, 128, 128, 0.3);
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-right: 40px;
+    padding-left: 40px;
+}
+
+.name_slider{
+    margin-bottom: 20px;
+}
+
+.feature_category_name {
+    margin-top: 40px;
+    margin-bottom: 50px;
+}
