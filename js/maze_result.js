@@ -1,5 +1,3 @@
-var df
-
 var column_names_jp = {
     "1次的な特徴量": ["直線のマス数", "T字路のマス数", "十字路のマス数", "曲がり角のマス数", "行き止まりのマス数"],
     "2次的な特徴量": [/*"直線の長さ",*/ "直線の長さの標準偏差",
@@ -115,10 +113,36 @@ function createSearchBox(){
     search_box_div.appendChild(search_button)
 }
 
-function readCsv(csvPath) {
-    df = $.csv.toArrays(csvPath);
-    console.log(df)
+function readCsvToDict(csvPath) {
+    var csv_dict_list = []
+
+    const request = new XMLHttpRequest();
+	request.open('GET', csvPath, false);
+	request.send(null);
+
+    var csvData = request.responseText
+
+    var lines = csvData.split("\n");
+ 
+    for (var i = 0; i < lines.length-1; i++) {
+        if (i == 0){
+            var column_names = lines[i].split(",").slice(1)
+            console.log(column_names)
+        }
+        else {
+            var csv_dict = {}
+            console.log(lines[i].split(","))
+            for (var j = 0; j < column_names.length; j++){
+                csv_dict[column_names[j]] = lines[i].split(",")[j+1]
+            }
+            csv_dict_list.push(csv_dict)
+        }
+    }
+    return csv_dict_list
 }
 
 createSearchBox()
-readCsv("./maze_data.csv")
+maze_data_dict = readCsvToDict("../research_data/maze_data.csv")
+console.log(maze_data_dict)
+maze_feature_dict = readCsvToDict("../research_data/MasterMazeData_features_df.csv")
+console.log(maze_feature_dict)
