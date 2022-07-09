@@ -17,6 +17,7 @@
         integrity="sha512-1mDhG//LAjM3pLXCJyaA+4c+h5qmMoTc7IuJyuNNPaakrWT9rVTxICK4tIizf7YwJsXgDC2JP74PGCc7qxLAHw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.2.0/wNumb.min.js" integrity="sha512-igVQ7hyQVijOUlfg3OmcTZLwYJIBXU63xL9RC12xBHNpmGJAktDnzl9Iw0J4yrSaQtDxTTVlwhY730vphoVqJQ==" 
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
     <link rel="stylesheet" href="./css/maze_result.css">
 </head>
 
@@ -29,11 +30,11 @@
         <h1 class="text-center" style="margin-bottom: 100px;">Maze System</h1>
 
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
                 <div class="search_box text-center" id="search_box"></div>
             </div>
             <div class="col">
-                
+                <div class="row" id="maze_image_card_list"></div>
             </div>
         </div>
     </div>
@@ -44,6 +45,9 @@
         </div>
     </footer>
     <script src="./js/maze_result.js"></script>
+    <script>
+        lazyload();
+    </script>
 </body>
 
 </html>

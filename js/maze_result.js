@@ -144,8 +144,69 @@ function readCsvToDict(csvPath) {
     return csv_dict_list
 }
 
+function showMazeImageCard(maze_data_dict, maze_feature_dict){
+    maze_image_card_list_div = document.getElementById("maze_image_card_list")
+
+    for (var i = 0; i < maze_data_dict.length; i++){
+        var maze_data = maze_data_dict[i]
+
+        card_div = document.createElement("div")
+        card_div.classList.add("card")
+        card_div.classList.add("text-center")
+        card_div.style.width = "18rem"
+
+        maze_img = document.createElement("img")
+        var image_name = "W" +
+                        maze_data["W"] +
+                        "H" +
+                        maze_data["H"] +
+                        "S1,1E" +
+                        maze_data["endX"] +
+                        "," +
+                        maze_data["endY"] +
+                        "M" +
+                        maze_data["_base64_name_"]
+        if (i <= 50) {
+            maze_img.src = "../research_data/maze_images/" + 
+                            maze_data["size"] + 
+                            "/origin_maze/" +
+                            image_name +
+                            ".png"
+        }
+        else {
+            // maze_img.src = "dummy.png"
+            maze_img.setAttribute("data-src", 
+                                  "../research_data/maze_images/" + 
+                                  maze_data["size"] + 
+                                  "/origin_maze/" +
+                                  image_name +
+                                  ".png"
+            )
+            maze_img.classList.add("lazyload")
+        }
+        maze_img.classList.add("card-img-top")
+        maze_img.id = "maze_image"
+
+        card_body_div = document.createElement("div")
+        card_body_div.classList.add("card-body")
+
+        card_title_h5 = document.createElement("h5")
+        card_title_h5.classList.add("card-title")
+        card_title_h5.innerText = image_name
+
+        card_body_div.appendChild(card_title_h5)
+
+        card_div.appendChild(maze_img)
+        card_div.appendChild(card_body_div)
+
+        maze_image_card_list_div.appendChild(card_div)
+    }
+}
+
 createSearchBox()
 maze_data_dict = readCsvToDict("../research_data/maze_data.csv")
-console.log(maze_data_dict)
+//console.log(maze_data_dict)
 maze_feature_dict = readCsvToDict("../research_data/MasterMazeData_features_df.csv")
-console.log(maze_feature_dict)
+//console.log(maze_feature_dict)
+
+showMazeImageCard(maze_data_dict, maze_feature_dict)
