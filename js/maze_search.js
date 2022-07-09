@@ -134,9 +134,20 @@ createSizeSlider()
 createSearchBox()
 
 function searchButtonClick(){
-    baseURL = "http://127.0.0.1:5500/maze_result.html"
+    var baseURL = "http://127.0.0.1:5500/maze_result.html"
+    var params_str = "?algo="
 
-    params_str = "?"
+    var algo_names_list = ["AldousBroder", "Division", "GrowingTree", "Kruskal", "Prims", "Sidewinder"]
+    var selected_algo = []
+    var algo_checkboxes_div = document.getElementById("algo_checkboxes")
+    for (var i = 0; i < algo_checkboxes_div.childElementCount; i++){
+        if(algo_checkboxes_div.children[i].children[0].checked){
+            selected_algo.push(algo_names_list[i])
+        }
+    }
+    params_str += selected_algo.join(",")
+    params_str += "&"
+
     for(var key in slider_dict){
         var _min = slider_dict[key].get()[0]
         var _max = slider_dict[key].get()[1]
