@@ -47,7 +47,12 @@ function getURLParam(key){
     let url = new URL(window.location.href);
     let params = url.searchParams;
 
-    return params.get(key).split(",").map(Number)
+    if (params.has(key)){
+        return params.get(key).split(",").map(Number)
+    }
+    else {
+        return [feature_max_min_dict[key]["min"], feature_max_min_dict[key]["max"]]
+    }
 }
 
 function createSearchBox(){
