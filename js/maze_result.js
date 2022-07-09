@@ -43,6 +43,12 @@ var feature_max_min_dict = {
     'straight_len_log_slope': {'max': 0.331, 'min': -0.628, 'digit': 3}
 }
 
+function getURLParam(key){
+    let url = new URL(window.location.href);
+    let params = url.searchParams;
+
+    return params.get(key).split(",").map(Number)
+}
 
 function createSearchBox(){
     search_box_div = document.getElementById("search_box")
@@ -73,11 +79,12 @@ function createSearchBox(){
 
             slider_div = document.createElement("div")
             slider_div.id = "slider"
-
+            
+            var _min_max = getURLParam(column_names_en[key][i])
             noUiSlider.create(slider_div, {
                 start: [
-                    feature_max_min_dict[column_names_en[key][i]]["min"], 
-                    feature_max_min_dict[column_names_en[key][i]]["max"]
+                    _min_max[0], 
+                    _min_max[1]
                 ],
                 connect: true,
                 range: {

@@ -43,6 +43,7 @@ var feature_max_min_dict = {
     'straight_len_log_slope': {'max': 0.331, 'min': -0.628, 'digit': 3}
 }
 
+var slider_dict = {}
 
 function createSearchBox(){
     search_box_div = document.getElementById("search_box")
@@ -74,7 +75,7 @@ function createSearchBox(){
             slider_div = document.createElement("div")
             slider_div.id = "slider"
 
-            noUiSlider.create(slider_div, {
+            var slider = noUiSlider.create(slider_div, {
                 start: [
                     feature_max_min_dict[column_names_en[key][i]]["min"], 
                     feature_max_min_dict[column_names_en[key][i]]["max"]
@@ -89,6 +90,7 @@ function createSearchBox(){
                     wNumb({decimals: feature_max_min_dict[column_names_en[key][i]]["digit"]}),
                 ],
             });
+            slider_dict[column_names_en[key][i]] = slider
 
             col_name_div.appendChild(name_p)
             col_slider_div.appendChild(slider_div)
@@ -103,7 +105,21 @@ function createSearchBox(){
     search_button.type = "button"
     search_button.innerText = "検索"
     search_button.classList.add("search_button")
+    search_button.addEventListener('click', searchButtonClick);
     search_box_div.appendChild(search_button)
 }
 
 createSearchBox()
+
+function searchButtonClick(){
+    baseURL = "http://127.0.0.1:5500/maze_result.html"
+
+    params_str = "?"
+    for(var key in slider_dict){
+        var _min = slider_dict[key].get()[0]
+        var _max = slider_dict[key].get()[1]
+        params_str += key + "=" + _min + "," + _max + "&"
+    }
+    console.log(baseURL + params_str)
+    window.location.href = baseURL + params_str
+}
