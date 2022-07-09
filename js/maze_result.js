@@ -120,6 +120,7 @@ function createSearchBox(){
     search_button.type = "button"
     search_button.innerText = "検索"
     search_button.classList.add("search_button")
+    search_button.addEventListener('click', searchButtonClick);
     search_box_div.appendChild(search_button)
 }
 
@@ -190,11 +191,13 @@ function isShowCard(maze_feature){
 }
 
 function showMazeImageCard(maze_data_dict, maze_feature_dict){
+    var isshow = false
     maze_image_card_list_div = document.getElementById("maze_image_card_list")
 
     for (var i = 0; i < maze_data_dict.length; i++){
         var maze_data = maze_data_dict[i]
         if (isShowCard(maze_feature_dict[i])){
+            isshow = true
             // break
 
             card_div = document.createElement("div")
@@ -249,6 +252,35 @@ function showMazeImageCard(maze_data_dict, maze_feature_dict){
             maze_image_card_list_div.appendChild(card_div)
         }
     }
+
+    if (!isshow){
+        no_result_h3 = document.getElementById("no_result")
+        no_result_h3.style.display = ""
+    }
+}
+
+function searchButtonClick(){
+    var baseURL = "http://127.0.0.1:5500/maze_result.html"
+    var params_str = "?algo="
+
+    var algo_names_list = ["AldousBroder", "Division", "GrowingTree", "Kruskal", "Prims", "Sidewinder"]
+    var selected_algo = []
+    var algo_checkboxes_div = document.getElementById("algo_checkboxes")
+    for (var i = 0; i < algo_checkboxes_div.childElementCount; i++){
+        if(algo_checkboxes_div.children[i].children[0].checked){
+            selected_algo.push(algo_names_list[i])
+        }
+    }
+    params_str += selected_algo.join(",")
+    params_str += "&"
+
+    for(var key in slider_dict){
+        var _min = slider_dict[key].get()[0]
+        var _max = slider_dict[key].get()[1]
+        params_str += key + "=" + _min + "," + _max + "&"
+    }
+    console.log(baseURL + params_str)
+    window.location.href = baseURL + params_str
 }
 
 createSizeSlider()
