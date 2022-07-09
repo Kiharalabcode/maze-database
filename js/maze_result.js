@@ -1,3 +1,5 @@
+var df
+
 var column_names_jp = {
     "1次的な特徴量": ["直線のマス数", "T字路のマス数", "十字路のマス数", "曲がり角のマス数", "行き止まりのマス数"],
     "2次的な特徴量": [/*"直線の長さ",*/ "直線の長さの標準偏差",
@@ -113,4 +115,10 @@ function createSearchBox(){
     search_box_div.appendChild(search_button)
 }
 
+function readCsv(csvPath) {
+    df = $.csv.toArrays(csvPath);
+    console.log(df)
+}
+
 createSearchBox()
+readCsv("./maze_data.csv")
