@@ -205,6 +205,10 @@ function showMazeImageCard(maze_data_dict, maze_feature_dict){
             card_div.classList.add("text-center")
             card_div.style.width = "18rem"
 
+            maze_img_a = document.createElement("a")
+            maze_img_a.setAttribute('href', 
+                                    "http://127.0.0.1:5500/maze_detail.html?uniquename=" + maze_data["_base64_name_"]
+                                    )
             maze_img = document.createElement("img")
             var image_name = "W" +
                             maze_data["W"] +
@@ -237,6 +241,8 @@ function showMazeImageCard(maze_data_dict, maze_feature_dict){
             maze_img.classList.add("card-img-top")
             maze_img.id = "maze_image"
 
+            maze_img_a.appendChild(maze_img)
+
             card_body_div = document.createElement("div")
             card_body_div.classList.add("card-body")
 
@@ -246,7 +252,7 @@ function showMazeImageCard(maze_data_dict, maze_feature_dict){
 
             card_body_div.appendChild(card_title_h5)
 
-            card_div.appendChild(maze_img)
+            card_div.appendChild(maze_img_a)
             card_div.appendChild(card_body_div)
 
             maze_image_card_list_div.appendChild(card_div)

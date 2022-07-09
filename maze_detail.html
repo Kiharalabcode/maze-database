@@ -11,21 +11,48 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
-        integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="./maze_detail.css">
+    <link rel="stylesheet" href="./css/maze_detail.css">
 </head>
 
 <body>
-    <div class="container">
-        <h1>Maze System</h1>
+    <!-- <header>
+        <img src="./image/labyrinth-g1ad962d64_1920.jpg" class="img-fluid" style="pointer-events: none;">
+    </header> -->
 
-        <div id="bd"></div>
-        <div id="maze_title"></div>
-        <div id="maze_param"></div>
-        <div id="maze_graph" class="row"></div>
-        <div id="maze_text"></div>
+    <div class="container">
+        <h1 class="text-center" style="margin-bottom: 100px;">Maze System</h1>
+
+        <div class="text-break">
+            <h2>迷路固有名</h2>
+            <h4 id="maze_unique_name">
+            W51H51S1,1E49,49M______2fIYCYNDAiwdJ3GyTbYvbRL02Wd_lfZAOUVAe7a1YnISQdZ4sxwB6tYSp1L3MUhFXtKeaqtaOUbLYijbTyxt3arB6q8vTCBrRNbVO62XCrCQEXNH1v1joZROL8MWO5344oTLRstSnLxMPKdC5rCfIv6o77lV7RN1CoAKddG4pzcl3rcrcrSykxTvKFQwa5alW5qx2FltirZxKzJP___8_
+            </h4>
+        </div>
+        <div class="row"></div>
+            <div class="col-9">
+                <div class="row">
+                    <div class="col-4">
+                        <img id="origin_maze" src="">
+                    </div>
+                    <div class="col-4">
+                        <img id="origin_maze_correctpath" src="">
+                    </div>
+                    <div class="col-4">
+                        <img id="origin_maze_color" src="">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <!-- <img src=""> -->
+                    </div>
+                    <div class="col-4"></div>
+                    <div class="col-4"></div>
+                </div>
+            </div>
+            <div class="col-3">
+                <img src="">
+            </div>
+        </div>
     </div>
 
     <footer class="footer bg-dark">
@@ -33,8 +60,7 @@
             <p class="text-muted text-white">Kihara Lab. All rights reserved.</p>
         </div>
     </footer>
-    
-    <script src="./maze_detail.js"></script>
+    <script src="./js/maze_detail.js"></script>
 </body>
 
 </html>
