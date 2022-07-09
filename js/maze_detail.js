@@ -39,7 +39,6 @@ function getMazeData(unique_name, maze_data_dict_list, maze_feature_dict_list){
     }
 }
 
-
 function showImages(maze_data_dict){
     var image_file_name = "W" +
                           maze_data_dict["W"] +
@@ -67,6 +66,98 @@ function showImages(maze_data_dict){
                                                  image_file_name
 }
 
+function showMazeGraph(size_data, maze_feature_dict) {
+    const maze_graph_div = document.getElementById("maze_graph")
+
+    for (key in maze_feature_dict) {
+        if (key == "maze_name" || key == "size") continue
+
+        var graph_div = document.createElement("div")
+        graph_div.classList.add("graph")
+
+        var graph_canvas = document.createElement("canvas")
+        graph_canvas.id = key + "_canvas"
+
+        graph_div.appendChild(graph_canvas)
+
+        maze_graph_div.appendChild(graph_div)
+
+        
+        var count = {};
+        arr = size_data.map(row => Math.round(Number(row[key]) * 100) / 100)
+        for (var i = 0; i < arr.length; i++) {
+            count[arr[i]] = (count[arr[i]] || 0) + 1;
+        }
+
+        backgroundcolors = []
+        for (var i = 0; i < Object.keys(count).length; i++){
+            console.log(Object.keys(count)[i])
+            if (Object.keys(count)[i] == Math.round(Number(maze_feature_dict[key]) * 100) / 100){
+                backgroundcolors[i] = "rgba(255,0,0,0.7)"
+            }
+            else {
+                backgroundcolors[i] = "rgba(71,71,71,0.7)"
+            }
+        }
+        console.log(backgroundcolors)
+
+        var data = {
+            labels: Object.keys(count), // the #4 being a string is the only difference
+            datasets: [{
+                label: key,
+                backgroundColor: backgroundcolors,
+                barPercentage: 1,
+                categoryPercentage: 1,
+                data: Object.values(count),
+                xAxisID: "xA"
+            }
+            ]
+        };
+
+        var options = {
+            scales: {
+                xA: {
+                    display: false
+                },
+                x: {
+                    display: true,
+                    grid: {
+                        offset: false
+                    }
+                },
+                y: {
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false,
+                },
+                title: {
+                    display: true,
+                    text: key
+                }
+            }
+        };
+
+        new Chart(graph_canvas, {
+            type: 'bar',
+            data: data,
+            options: options
+        });
+    }
+}
+
+function getSizeData(maze_feature_dict_list, size) {
+    size_data_list = []
+    for (var i = 0; i < maze_feature_dict_list.length; i++){
+        if (maze_feature_dict_list[i]["size"] == size) size_data_list.push(maze_feature_dict_list[i])
+    }
+    return size_data_list
+}
+
 maze_data_dict_list = readCsvToDict("../research_data/maze_data.csv")
 //console.log(maze_data_dict_list)
 maze_feature_dict_list = readCsvToDict("../research_data/MasterMazeData_features_df.csv")
@@ -79,3 +170,5 @@ var maze_data = getMazeData(unique_name, maze_data_dict_list, maze_feature_dict_
 var maze_data_dict = maze_data[0]
 var maze_feature_dict = maze_data[1]
 showImages(maze_data_dict)
+
+showMazeGraph(getSizeData(maze_feature_dict_list, maze_data_dict["size"]), maze_feature_dict)

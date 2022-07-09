@@ -24,3 +24,18 @@ body>.container {
     padding-left: 15px;
     margin-right: 0;
 }
+
+.maze_image {
+    width: 90%;
+}
+
+.param_table {
+    padding-left: 20%;
+    padding-right: 20%;
+    margin-top: 5%
+}
+
+.graph {
+    width: 30%;
+    margin-bottom: 10px;
+}

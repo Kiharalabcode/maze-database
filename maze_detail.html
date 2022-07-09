@@ -11,6 +11,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
+        integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="./css/maze_detail.css">
 </head>
 
@@ -24,26 +27,24 @@
 
         <div class="text-break">
             <h2>迷路固有名</h2>
-            <h4 id="maze_unique_name">
-            W51H51S1,1E49,49M______2fIYCYNDAiwdJ3GyTbYvbRL02Wd_lfZAOUVAe7a1YnISQdZ4sxwB6tYSp1L3MUhFXtKeaqtaOUbLYijbTyxt3arB6q8vTCBrRNbVO62XCrCQEXNH1v1joZROL8MWO5344oTLRstSnLxMPKdC5rCfIv6o77lV7RN1CoAKddG4pzcl3rcrcrSykxTvKFQwa5alW5qx2FltirZxKzJP___8_
-            </h4>
+            <h4 id="maze_unique_name"></h4>
         </div>
-        <div class="row"></div>
+        <div class="row">
             <div class="col-9">
                 <div class="row">
                     <div class="col-4">
-                        <img id="origin_maze" src="">
+                        <img class="maze_image" id="origin_maze" src="">
                     </div>
                     <div class="col-4">
-                        <img id="origin_maze_correctpath" src="">
+                        <img class="maze_image" id="origin_maze_correctpath" src="">
                     </div>
                     <div class="col-4">
-                        <img id="origin_maze_color" src="">
+                        <img class="maze_image" id="origin_maze_color" src="">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-4">
-                        <!-- <img src=""> -->
+                        <img src="">
                     </div>
                     <div class="col-4"></div>
                     <div class="col-4"></div>
@@ -52,6 +53,127 @@
             <div class="col-3">
                 <img src="">
             </div>
+        </div>
+        <div class="row param_table">
+            <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>パラメータ名</td>
+                        <td>この迷路の値</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Generation Algorithm</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>maze size</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>straight_num</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>T_num</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>cross_num</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>turn_pos_num</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>dead_end_num</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>straight_len_log_slope</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>straight_len_std</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>correct_path_len</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>turn_num</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>パラメータ名</td>
+                        <td>この迷路の値</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>boader_l</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>neighbor_sum</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>L_num</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>L_size</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>L_size_std</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>R_num</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>R_size</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>R_size_std</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>goal_depth</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>depth_std</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>depth_max</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>depth_mean</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+        <div id="maze_graph" class="row">
+            
         </div>
     </div>
 
