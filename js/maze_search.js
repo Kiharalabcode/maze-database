@@ -109,6 +109,27 @@ function createSearchBox(){
     search_box_div.appendChild(search_button)
 }
 
+function createSizeSlider(){
+    var size_slider = document.getElementById("slider")
+    var slider = noUiSlider.create(size_slider, {
+        start: [
+            7, 
+            51
+        ],
+        connect: true,
+        range: {
+            'min': 7,
+            'max': 51
+        },
+        tooltips: [
+            wNumb({decimals: 0}),
+            wNumb({decimals: 0}),
+        ],
+    });
+    slider_dict["size"] = slider
+}
+
+createSizeSlider()
 createSearchBox()
 
 function searchButtonClick(){
