@@ -48,7 +48,8 @@ function getURLParam(key){
     let params = url.searchParams;
 
     if (params.has(key)){
-        return params.get(key).split(",").map(Number)
+        if (key == "algo") return params.get(key).split(",")
+        else return params.get(key).split(",").map(Number)
     }
     else {
         if (key == "size") return [7, 51]
@@ -171,62 +172,82 @@ function readCsvToDict(csvPath) {
     return csv_dict_list
 }
 
+function isShowCard(maze_feature){
+    for(key in maze_feature) {
+        if (key == "maze_name"){
+            var selected_algose = getURLParam("algo")
+            if (!selected_algose.includes(maze_feature[key])) return false
+        }
+        else if(key == "straight_len_log_slope"){
+            continue
+        }
+        else {
+            var _min_max = getURLParam(key)
+            if (maze_feature[key] < _min_max[0] || maze_feature[key] > _min_max[1]) return false
+        }
+    }
+    return true
+}
+
 function showMazeImageCard(maze_data_dict, maze_feature_dict){
     maze_image_card_list_div = document.getElementById("maze_image_card_list")
 
     for (var i = 0; i < maze_data_dict.length; i++){
         var maze_data = maze_data_dict[i]
+        if (isShowCard(maze_feature_dict[i])){
+            // break
 
-        card_div = document.createElement("div")
-        card_div.classList.add("card")
-        card_div.classList.add("text-center")
-        card_div.style.width = "18rem"
+            card_div = document.createElement("div")
+            card_div.classList.add("card")
+            card_div.classList.add("text-center")
+            card_div.style.width = "18rem"
 
-        maze_img = document.createElement("img")
-        var image_name = "W" +
-                        maze_data["W"] +
-                        "H" +
-                        maze_data["H"] +
-                        "S1,1E" +
-                        maze_data["endX"] +
-                        "," +
-                        maze_data["endY"] +
-                        "M" +
-                        maze_data["_base64_name_"]
-        if (i <= 50) {
-            maze_img.src = "../research_data/maze_images/" + 
-                            maze_data["size"] + 
-                            "/origin_maze/" +
-                            image_name +
-                            ".png"
+            maze_img = document.createElement("img")
+            var image_name = "W" +
+                            maze_data["W"] +
+                            "H" +
+                            maze_data["H"] +
+                            "S1,1E" +
+                            maze_data["endX"] +
+                            "," +
+                            maze_data["endY"] +
+                            "M" +
+                            maze_data["_base64_name_"]
+            if (i <= 50) {
+                maze_img.src = "../research_data/maze_images/" + 
+                                maze_data["size"] + 
+                                "/origin_maze/" +
+                                image_name +
+                                ".png"
+            }
+            else {
+                // maze_img.src = "dummy.png"
+                maze_img.setAttribute("data-src", 
+                                    "../research_data/maze_images/" + 
+                                    maze_data["size"] + 
+                                    "/origin_maze/" +
+                                    image_name +
+                                    ".png"
+                )
+                maze_img.classList.add("lazyload")
+            }
+            maze_img.classList.add("card-img-top")
+            maze_img.id = "maze_image"
+
+            card_body_div = document.createElement("div")
+            card_body_div.classList.add("card-body")
+
+            card_title_h5 = document.createElement("h5")
+            card_title_h5.classList.add("card-title")
+            card_title_h5.innerText = image_name
+
+            card_body_div.appendChild(card_title_h5)
+
+            card_div.appendChild(maze_img)
+            card_div.appendChild(card_body_div)
+
+            maze_image_card_list_div.appendChild(card_div)
         }
-        else {
-            // maze_img.src = "dummy.png"
-            maze_img.setAttribute("data-src", 
-                                  "../research_data/maze_images/" + 
-                                  maze_data["size"] + 
-                                  "/origin_maze/" +
-                                  image_name +
-                                  ".png"
-            )
-            maze_img.classList.add("lazyload")
-        }
-        maze_img.classList.add("card-img-top")
-        maze_img.id = "maze_image"
-
-        card_body_div = document.createElement("div")
-        card_body_div.classList.add("card-body")
-
-        card_title_h5 = document.createElement("h5")
-        card_title_h5.classList.add("card-title")
-        card_title_h5.innerText = image_name
-
-        card_body_div.appendChild(card_title_h5)
-
-        card_div.appendChild(maze_img)
-        card_div.appendChild(card_body_div)
-
-        maze_image_card_list_div.appendChild(card_div)
     }
 }
 
