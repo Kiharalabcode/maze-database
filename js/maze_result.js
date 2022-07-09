@@ -127,11 +127,9 @@ function readCsvToDict(csvPath) {
     for (var i = 0; i < lines.length-1; i++) {
         if (i == 0){
             var column_names = lines[i].split(",").slice(1)
-            console.log(column_names)
         }
         else {
             var csv_dict = {}
-            console.log(lines[i].split(","))
             for (var j = 0; j < column_names.length; j++){
                 csv_dict[column_names[j]] = lines[i].split(",")[j+1]
             }
