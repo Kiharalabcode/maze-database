@@ -51,19 +51,22 @@ function getURLParam(key){
         return params.get(key).split(",").map(Number)
     }
     else {
-        return [feature_max_min_dict[key]["min"], feature_max_min_dict[key]["max"]]
+        if (key == "size") return [7, 51]
+        else return [feature_max_min_dict[key]["min"], feature_max_min_dict[key]["max"]]
     }
 }
+
+var slider_dict = {}
 
 function createSearchBox(){
     search_box_div = document.getElementById("search_box")
 
     for (var key in column_names_jp){
-        feature_category_name_h2 = document.createElement("h2")
-        feature_category_name_h2.classList.add("text-center")
-        feature_category_name_h2.classList.add("feature_category_name")
-        feature_category_name_h2.innerText = key
-        search_box_div.appendChild(feature_category_name_h2)
+        feature_category_name_h3 = document.createElement("h3")
+        feature_category_name_h3.classList.add("text-center")
+        feature_category_name_h3.classList.add("feature_category_name")
+        feature_category_name_h3.innerText = key
+        search_box_div.appendChild(feature_category_name_h3)
 
         for (var i in column_names_jp[key]){
             row_div = document.createElement("div")
@@ -86,7 +89,7 @@ function createSearchBox(){
             slider_div.id = "slider"
             
             var _min_max = getURLParam(column_names_en[key][i])
-            noUiSlider.create(slider_div, {
+            var slider = noUiSlider.create(slider_div, {
                 start: [
                     _min_max[0], 
                     _min_max[1]
@@ -101,6 +104,7 @@ function createSearchBox(){
                     wNumb({decimals: feature_max_min_dict[column_names_en[key][i]]["digit"]}),
                 ],
             });
+            slider_dict[column_names_en[key][i]] = slider
 
             col_name_div.appendChild(name_p)
             col_slider_div.appendChild(slider_div)
@@ -116,6 +120,29 @@ function createSearchBox(){
     search_button.innerText = "検索"
     search_button.classList.add("search_button")
     search_box_div.appendChild(search_button)
+}
+
+function createSizeSlider(){
+    var size_slider = document.getElementById("slider")
+
+    var _min_max = getURLParam("size")
+
+    var slider = noUiSlider.create(size_slider, {
+        start: [
+            _min_max[0], 
+            _min_max[1]
+        ],
+        connect: true,
+        range: {
+            'min': 7,
+            'max': 51
+        },
+        tooltips: [
+            wNumb({decimals: 0}),
+            wNumb({decimals: 0}),
+        ],
+    });
+    slider_dict["size"] = slider
 }
 
 function readCsvToDict(csvPath) {
@@ -203,6 +230,7 @@ function showMazeImageCard(maze_data_dict, maze_feature_dict){
     }
 }
 
+createSizeSlider()
 createSearchBox()
 maze_data_dict = readCsvToDict("../research_data/maze_data.csv")
 //console.log(maze_data_dict)

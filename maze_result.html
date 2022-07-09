@@ -31,7 +31,46 @@
 
         <div class="row">
             <div class="col-4">
-                <div class="search_box text-center" id="search_box"></div>
+                <div class="search_box text-center" id="search_box">
+                    <div class="col feature_name_div">
+                        <p style="font-size: 20px">迷路生成アルゴリズム</p>
+                    </div>
+                    <div class="row check_boxes" id="algo_checkboxes">
+                        <div class="form-check form-check-inline col">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="AldousBroder" checked>
+                            <label class="form-check-label" for="inlineCheckbox1" style="font-size: 18px;">AldousBroder</label>
+                        </div>
+                        <div class="form-check form-check-inline col">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Division" checked>
+                            <label class="form-check-label" for="inlineCheckbox2" style="font-size: 18px;">Division</label>
+                        </div>
+                        <div class="form-check form-check-inline col">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="GrowingTree" checked>
+                            <label class="form-check-label" for="inlineCheckbox3" style="font-size: 18px;">GrowingTree</label>
+                        </div>
+                        <div class="form-check form-check-inline col">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="Kruskal" checked>
+                            <label class="form-check-label" for="inlineCheckbox4" style="font-size: 18px;">Kruskal</label>
+                        </div>
+                        <div class="form-check form-check-inline col">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="Prims" checked>
+                            <label class="form-check-label" for="inlineCheckbox5" style="font-size: 18px;">Prims</label>
+                        </div>
+                        <div class="form-check form-check-inline col">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="Sidewinder" checked>
+                            <label class="form-check-label" for="inlineCheckbox6" style="font-size: 18px;">Sidewinder</label>
+                        </div>
+                    </div>
+
+                    <div class="row name_slider">
+                        <div class="col feature_name_div">
+                            <p class="feature_name">迷路サイズ</p>
+                        </div>
+                        <div class="slider_div">
+                            <div id="slider"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col">
                 <div class="row" id="maze_image_card_list"></div>
