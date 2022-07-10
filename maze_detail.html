@@ -44,16 +44,32 @@
                 </div>
                 <div class="row">
                     <div class="col-4">
-                        <img src="">
+                        <img class="maze_image" id="thin_wall_maze" src="">
                     </div>
                     <div class="col-4"></div>
                     <div class="col-4"></div>
                 </div>
             </div>
-            <div class="col-3">
-                <img src="">
+            <div class="col-3 text-center fs-4">
+                <!-- <img class="tree_image" id="tree_graph" src=""> -->
+                <div id="tree_graph_div" data-bs-toggle="modal" data-bs-target="#tree_graph_modal">クリックで<br>木構造を見る</div>
             </div>
         </div>
+
+        <div class="modal fade" id="tree_graph_modal" tabindex="-1" aria-labelledby="tree_graph_modal_label" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="tree_graph_modal_label">木構造</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center" style="padding-bottom: 50px;">
+                    <img class="tree_image" id="tree_graph" src="">
+                </div>
+              </div>
+            </div>
+          </div>
+
         <div class="row param_table">
             <div class="col">
             <table class="table">

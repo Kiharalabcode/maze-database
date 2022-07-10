@@ -64,6 +64,14 @@ function showImages(maze_data_dict){
                                                  maze_data_dict["size"] +
                                                  "/origin_maze_color/" +
                                                  image_file_name
+    document.getElementById("thin_wall_maze").src = "../research_data/maze_images/" +
+                                                 maze_data_dict["size"] +
+                                                 "/thin_wall_maze/" +
+                                                 image_file_name
+    document.getElementById("tree_graph").src = "../research_data/maze_images/" +
+                                                 maze_data_dict["size"] +
+                                                 "/tree_graph/" +
+                                                 image_file_name
 }
 
 function showMazeGraph(size_data, maze_feature_dict) {
