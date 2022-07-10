@@ -158,6 +158,13 @@ function getSizeData(maze_feature_dict_list, size) {
     return size_data_list
 }
 
+function showFeatureParam(maze_feature_dict){
+    for(key in maze_feature_dict){
+        elm = document.getElementById(key)
+        elm.innerText = maze_feature_dict[key]
+    }
+}
+
 maze_data_dict_list = readCsvToDict("../research_data/maze_data.csv")
 //console.log(maze_data_dict_list)
 maze_feature_dict_list = readCsvToDict("../research_data/MasterMazeData_features_df.csv")
@@ -171,4 +178,5 @@ var maze_data_dict = maze_data[0]
 var maze_feature_dict = maze_data[1]
 showImages(maze_data_dict)
 
+showFeatureParam(maze_feature_dict)
 showMazeGraph(getSizeData(maze_feature_dict_list, maze_data_dict["size"]), maze_feature_dict)
