@@ -74,6 +74,9 @@ function showMazeGraph(size_data, maze_feature_dict) {
 
         var graph_div = document.createElement("div")
         graph_div.classList.add("graph")
+        graph_div.id = key + "_div"
+        graph_div.setAttribute("data-bs-toggle", "modal")
+        graph_div.setAttribute("data-bs-target", "#"+key+"_modal")
 
         var graph_canvas = document.createElement("canvas")
         graph_canvas.id = key + "_canvas"
@@ -84,22 +87,20 @@ function showMazeGraph(size_data, maze_feature_dict) {
 
         
         var count = {};
-        arr = size_data.map(row => Math.round(Number(row[key]) * 100) / 100)
+        arr = size_data.map(row => Math.round(Number(row[key])))
         for (var i = 0; i < arr.length; i++) {
             count[arr[i]] = (count[arr[i]] || 0) + 1;
         }
 
         backgroundcolors = []
         for (var i = 0; i < Object.keys(count).length; i++){
-            console.log(Object.keys(count)[i])
-            if (Object.keys(count)[i] == Math.round(Number(maze_feature_dict[key]) * 100) / 100){
+            if (Object.keys(count)[i] == Math.round(Number(maze_feature_dict[key]))){
                 backgroundcolors[i] = "rgba(255,0,0,0.7)"
             }
             else {
                 backgroundcolors[i] = "rgba(71,71,71,0.7)"
             }
         }
-        console.log(backgroundcolors)
 
         var data = {
             labels: Object.keys(count), // the #4 being a string is the only difference
@@ -158,10 +159,154 @@ function getSizeData(maze_feature_dict_list, size) {
     return size_data_list
 }
 
+function getAlgoData(size_data, algo){
+    algo_data_list = []
+    for (var i = 0; i < size_data.length; i++){
+        if (size_data[i]["maze_name"] == algo) algo_data_list.push(size_data[i])
+    }
+    return algo_data_list
+}
+
 function showFeatureParam(maze_feature_dict){
     for(key in maze_feature_dict){
         elm = document.getElementById(key)
         elm.innerText = maze_feature_dict[key]
+    }
+}
+
+function showMazeGraphEachAlgo(size_data, maze_feature_dict){
+    var algo_names = ["AldousBroder", "Division", "GrowingTree", "Kruskal", "Prims", "Sidewinder"]
+    const algo_maze_graph_div = document.getElementById("algo_maze_graph")
+
+    for (key in maze_feature_dict) {
+        if (key == "maze_name" || key == "size") continue
+
+        var modal_div = document.createElement("div")
+        modal_div.classList.add("modal")
+        modal_div.classList.add("fade")
+        modal_div.id = key + "_modal"
+        modal_div.setAttribute("tabindex", "-1")
+        modal_div.setAttribute("aria-labelledby", key + "_modal_label")
+        modal_div.setAttribute("aria-hidden", "true")
+
+        var modal_dialog_div = document.createElement("div")
+        modal_dialog_div.classList.add("modal-dialog")
+
+        var modal_content_div = document.createElement("div")
+        modal_content_div.classList.add("modal-content")
+
+        var modal_header_div = document.createElement("div")
+        modal_header_div.classList.add("modal-header")
+
+        var modal_title_h5 = document.createElement("h5")
+        modal_title_h5.classList.add("modal-title")
+        modal_title_h5.id = key + "_modal_label"
+        modal_title_h5.innerText = key
+
+        var modal_header_button = document.createElement("button")
+        modal_header_button.type = "button"
+        modal_header_button.classList.add("btn-close")
+        modal_header_button.setAttribute("data-bs-dismiss", "modal")
+        modal_header_button.setAttribute("aria-label", "Close")
+
+        modal_header_div.appendChild(modal_title_h5)
+        modal_header_div.appendChild(modal_header_button)
+
+        modal_content_div.appendChild(modal_header_div)
+
+        var modal_body_div = document.createElement("div")
+        modal_body_div.classList.add("modal-body")
+
+        var modal_container_div = document.createElement("div")
+        modal_container_div.classList.add("container-fluid")
+
+        var row_div = document.createElement("div")
+        row_div.classList.add("row")
+
+        for (var i = 0; i < algo_names.length; i++) {
+
+            var graph_canvas = document.createElement("canvas")
+            graph_canvas.id = algo_names[i] + "_" + key + "_canvas"
+
+            row_div.appendChild(graph_canvas)
+
+            var algo_data = getAlgoData(size_data, algo_names[i])
+            console.log(algo_names[i])
+            console.log(algo_data.length)
+
+            var count = {};
+            arr = algo_data.map(row => Math.round(Number(row[key])))
+            for (var j = 0; j < arr.length; j++) {
+                count[arr[j]] = (count[arr[j]] || 0) + 1;
+            }
+            
+            if (algo_names[i] == maze_feature_dict["maze_name"]){
+                backgroundcolors = []
+                for (var j = 0; j < Object.keys(count).length; j++){
+                    if (Object.keys(count)[j] == Math.round(Number(maze_feature_dict[key]))){
+                        backgroundcolors[j] = "rgba(255,0,0,0.7)"
+                    }
+                    else {
+                        backgroundcolors[j] = "rgba(71,71,71,0.7)"
+                    }
+                }
+            }
+            else backgroundcolors = "rgba(71,71,71,0.7)"
+
+            var data = {
+                labels: Object.keys(count), // the #4 being a string is the only difference
+                datasets: [{
+                    label: algo_names[i],
+                    backgroundColor: backgroundcolors,
+                    barPercentage: 1,
+                    categoryPercentage: 1,
+                    data: Object.values(count),
+                    xAxisID: "xA"
+                }
+                ]
+            };
+
+            var options = {
+                scales: {
+                    xA: {
+                        display: false
+                    },
+                    x: {
+                        display: true,
+                        grid: {
+                            offset: false
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                    title: {
+                        display: true,
+                        text: algo_names[i]
+                    }
+                }
+            };
+
+            new Chart(graph_canvas, {
+                type: 'bar',
+                data: data,
+                options: options
+            });
+        }
+
+        modal_container_div.appendChild(row_div)
+        modal_body_div.appendChild(modal_container_div)
+        modal_content_div.appendChild(modal_body_div)
+        modal_dialog_div.appendChild(modal_content_div)
+        modal_div.appendChild(modal_dialog_div)
+        algo_maze_graph_div.appendChild(modal_div)
     }
 }
 
@@ -179,4 +324,6 @@ var maze_feature_dict = maze_data[1]
 showImages(maze_data_dict)
 
 showFeatureParam(maze_feature_dict)
-showMazeGraph(getSizeData(maze_feature_dict_list, maze_data_dict["size"]), maze_feature_dict)
+size_data = getSizeData(maze_feature_dict_list, maze_data_dict["size"])
+showMazeGraph(size_data, maze_feature_dict)
+showMazeGraphEachAlgo(size_data, maze_feature_dict)
