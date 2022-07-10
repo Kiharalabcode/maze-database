@@ -209,6 +209,7 @@ function showMazeImageCard(maze_data_dict, maze_feature_dict){
             maze_img_a.setAttribute('href', 
                                     "http://127.0.0.1:5500/maze_detail.html?uniquename=" + maze_data["_base64_name_"]
                                     )
+            maze_img_a.setAttribute("target", "_blank")
             maze_img = document.createElement("img")
             var image_name = "W" +
                             maze_data["W"] +
