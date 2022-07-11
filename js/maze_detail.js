@@ -52,23 +52,23 @@ function showImages(maze_data_dict){
                           maze_data_dict["_base64_name_"] +
                           ".png"
 
-    document.getElementById("origin_maze").src = "../research_data/maze_images/" +
+    document.getElementById("origin_maze").src = "https://kiharalabcode.github.io/maze-site/research_data/maze_images/" +
                                                  maze_data_dict["size"] +
                                                  "/origin_maze/" +
                                                  image_file_name
-    document.getElementById("origin_maze_correctpath").src = "../research_data/maze_images/" +
+    document.getElementById("origin_maze_correctpath").src = "https://kiharalabcode.github.io/maze-site/research_data/maze_images/" +
                                                  maze_data_dict["size"] +
                                                  "/origin_maze_correctpath/" +
                                                  image_file_name
-    document.getElementById("origin_maze_color").src = "../research_data/maze_images/" +
+    document.getElementById("origin_maze_color").src = "https://kiharalabcode.github.io/maze-site/research_data/maze_images/" +
                                                  maze_data_dict["size"] +
                                                  "/origin_maze_color/" +
                                                  image_file_name
-    document.getElementById("thin_wall_maze").src = "../research_data/maze_images/" +
+    document.getElementById("thin_wall_maze").src = "https://kiharalabcode.github.io/maze-site/research_data/maze_images/" +
                                                  maze_data_dict["size"] +
                                                  "/thin_wall_maze/" +
                                                  image_file_name
-    document.getElementById("tree_graph").src = "../research_data/maze_images/" +
+    document.getElementById("tree_graph").src = "https://kiharalabcode.github.io/maze-site/research_data/maze_images/" +
                                                  maze_data_dict["size"] +
                                                  "/tree_graph/" +
                                                  image_file_name
@@ -318,9 +318,9 @@ function showMazeGraphEachAlgo(size_data, maze_feature_dict){
     }
 }
 
-maze_data_dict_list = readCsvToDict("../research_data/maze_data.csv")
+maze_data_dict_list = readCsvToDict("https://raw.githubusercontent.com/Kiharalabcode/maze-site/main/research_data/maze_data.csv")
 //console.log(maze_data_dict_list)
-maze_feature_dict_list = readCsvToDict("../research_data/MasterMazeData_features_df.csv")
+maze_feature_dict_list = readCsvToDict("https://raw.githubusercontent.com/Kiharalabcode/maze-site/main/research_data/MasterMazeData_features_df.csv")
 //console.log(maze_feature_dict_list)
 
 var unique_name = getURLParam()
