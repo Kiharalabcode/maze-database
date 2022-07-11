@@ -14,18 +14,184 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
         integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="./maze_detail.css">
+    <link rel="stylesheet" href="./css/maze_detail.css">
 </head>
 
 <body>
-    <div class="container">
-        <h1>Maze System</h1>
+    <!-- <header>
+        <img src="./image/labyrinth-g1ad962d64_1920.jpg" class="img-fluid" style="pointer-events: none;">
+    </header> -->
 
-        <div id="bd"></div>
-        <div id="maze_title"></div>
-        <div id="maze_param"></div>
-        <div id="maze_graph" class="row"></div>
-        <div id="maze_text"></div>
+    <div class="container">
+        <a href="./maze_top.html" style="text-decoration: none;"><h1 class="text-center" style="margin-bottom: 100px;">Maze System</h1></a>
+
+        <div class="text-break">
+            <h2>迷路固有名</h2>
+            <h4 id="maze_unique_name"></h4>
+        </div>
+        <div class="row">
+            <div class="col-9">
+                <div class="row">
+                    <div class="col-4">
+                        <img class="maze_image" id="origin_maze" src="">
+                    </div>
+                    <div class="col-4">
+                        <img class="maze_image" id="origin_maze_correctpath" src="">
+                    </div>
+                    <div class="col-4">
+                        <img class="maze_image" id="origin_maze_color" src="">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <img class="maze_image" id="thin_wall_maze" src="">
+                    </div>
+                    <div class="col-4"></div>
+                    <div class="col-4"></div>
+                </div>
+            </div>
+            <div class="col-3 text-center fs-4">
+                <!-- <img class="tree_image" id="tree_graph" src=""> -->
+                <div id="tree_graph_div" data-bs-toggle="modal" data-bs-target="#tree_graph_modal">クリックで<br>木構造を見る</div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="tree_graph_modal" tabindex="-1" aria-labelledby="tree_graph_modal_label" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="tree_graph_modal_label">木構造</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center" style="padding-bottom: 50px;">
+                    <img class="tree_image" id="tree_graph" src="">
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <div class="row param_table">
+            <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>パラメータ名</td>
+                        <td>この迷路の値</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Generation Algorithm</td>
+                        <td id="maze_name"></td>
+                    </tr>
+                    <tr>
+                        <td>maze size</td>
+                        <td id="size"></td>
+                    </tr>
+                    <tr>
+                        <td>straight_num</td>
+                        <td id="straight_num"></td>
+                    </tr>
+                    <tr>
+                        <td>T_num</td>
+                        <td id="T_num"></td>
+                    </tr>
+                    <tr>
+                        <td>cross_num</td>
+                        <td id="cross_num"></td>
+                    </tr>
+                    <tr>
+                        <td>turn_pos_num</td>
+                        <td id="turn_pos_num"></td>
+                    </tr>
+                    <tr>
+                        <td>dead_end_num</td>
+                        <td id="dead_end_num"></td>
+                    </tr>
+                    <tr>
+                        <td>straight_len_log_slope</td>
+                        <td id="straight_len_log_slope"></td>
+                    </tr>
+                    <tr>
+                        <td>straight_len_std</td>
+                        <td id="straight_len_std"></td>
+                    </tr>
+                    <tr>
+                        <td>correct_path_len</td>
+                        <td id="correct_path_len"></td>
+                    </tr>
+                    <tr>
+                        <td>turn_num</td>
+                        <td id="turn_num"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>パラメータ名</td>
+                        <td>この迷路の値</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>boader_l</td>
+                        <td id="boader_l"></td>
+                    </tr>
+                    <tr>
+                        <td>neighbor_sum</td>
+                        <td id="neighbor_sum"></td>
+                    </tr>
+                    <tr>
+                        <td>L_num</td>
+                        <td id="L_num"></td>
+                    </tr>
+                    <tr>
+                        <td>L_size</td>
+                        <td id="L_size"></td>
+                    </tr>
+                    <tr>
+                        <td>L_size_std</td>
+                        <td id="L_size_std"></td>
+                    </tr>
+                    <tr>
+                        <td>R_num</td>
+                        <td id="R_num"></td>
+                    </tr>
+                    <tr>
+                        <td>R_size</td>
+                        <td id="R_size"></td>
+                    </tr>
+                    <tr>
+                        <td>R_size_std</td>
+                        <td id="R_size_std"></td>
+                    </tr>
+                    <tr>
+                        <td>goal_depth</td>
+                        <td id="gorl_depth"></td>
+                    </tr>
+                    <tr>
+                        <td>depth_std</td>
+                        <td id="depth_std"></td>
+                    </tr>
+                    <tr>
+                        <td>depth_max</td>
+                        <td id="depth_max"></td>
+                    </tr>
+                    <tr>
+                        <td>depth_mean</td>
+                        <td id="depth_mean"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+        <div id="maze_graph" class="row">
+            
+        </div>
+        <div id="algo_maze_graph"></div>
     </div>
 
     <footer class="footer bg-dark">
@@ -33,8 +199,7 @@
             <p class="text-muted text-white">Kihara Lab. All rights reserved.</p>
         </div>
     </footer>
-    
-    <script src="./maze_detail.js"></script>
+    <script src="./js/maze_detail.js"></script>
 </body>
 
 </html>

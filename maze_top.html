@@ -6,30 +6,101 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maze System</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
-        integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="./maze_top.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.0/nouislider.css" integrity="sha512-MKxcSu/LDtbIYHBNAWUQwfB3iVoG9xeMCm32QV5hZ/9lFaQZJVaXfz9aFa0IZExWzCpm7OWvp9zq9gVip/nLMg==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.0/nouislider.min.js" integrity="sha512-1mDhG//LAjM3pLXCJyaA+4c+h5qmMoTc7IuJyuNNPaakrWT9rVTxICK4tIizf7YwJsXgDC2JP74PGCc7qxLAHw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.2.0/wNumb.min.js" integrity="sha512-igVQ7hyQVijOUlfg3OmcTZLwYJIBXU63xL9RC12xBHNpmGJAktDnzl9Iw0J4yrSaQtDxTTVlwhY730vphoVqJQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="./css/maze_top.css">
 </head>
 
 <body>
-    <header>
+    <!-- <header>
         <img src="./image/labyrinth-g1ad962d64_1920.jpg" class="img-fluid" style="pointer-events: none;">
-    </header>
+    </header> -->
 
     <div class="container">
-        <h1 class="text-center">Maze System</h1>
+        <a href="./maze_top.html" style="text-decoration: none;">
+            <h1 class="text-center" style="margin-bottom: 100px;">Maze System</h1>
+        </a>
 
-        <div class="maze_target">
-            <h3 class="text-center">各サイズの迷路一覧</h3>
+        <div class="row easy_search text-center">
+            <div class="question">
+                <div class="row">
+                    <div class="col">
+                        <p class="text-center">曲がり角の数</p>
+                    </div>
+                    <div class="col">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="turn_num_radio" id="turn_num_many" value="many" onchange="selectRecommendAlgo()">
+                            <label class="form-check-label" for="turn_num_many">多い</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="turn_num_radio" id="turn_num_less" value="less" onchange="selectRecommendAlgo()">
+                            <label class="form-check-label" for="turn_num_less">少ない</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="turn_num_radio" id="turn_num_no" value="no" onchange="selectRecommendAlgo()" checked>
+                            <label class="form-check-label" for="turn_num_no">指定しない</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p class="text-center">分岐（T字路・十字路）の数</p>
+                    </div>
+                    <div class="col">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="branch_radio" id="branch_many" value="many" onchange="selectRecommendAlgo()">
+                            <label class="form-check-label" for="branch_many">多い</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="branch_radio" id="branch_less" value="less" onchange="selectRecommendAlgo()">
+                            <label class="form-check-label" for="branch_less">少ない</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="branch_radio" id="branch_no" value="no" onchange="selectRecommendAlgo()" checked>
+                            <label class="form-check-label" for="branch_no">指定しない</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p style="margin-top: 4%;">おすすめのアルゴリズム</p>
+            <div class="col-12 algo_list">
+                <div class="row" style="background-color: azure;">
+                    <div class="col fs-4" id="AldousBroder" style="display: none;">AldousBroder</div>
+                    <div class="col fs-4" id="Division" style="display: none;">Division</div>
+                    <div class="col fs-4" id="GrowingTree" style="display: none;">GrowingTree</div>
+                    <div class="col fs-4" id="Kruskal" style="display: none;">Kruskal</div>
+                    <div class="col fs-4" id="Prims" style="display: none;">Prims</div>
+                    <div class="col fs-4" id="Sidewinder" style="display: none;">Sidewinder</div>
+                    <div class="col fs-4" id="no_algo">どちらかの条件を選択してください</div>
+                </div>
+            </div>
 
-            <div class="text-center"><a href="./maze_list.html">迷路一覧へ</a></div>
+            <div class="row name_slider">
+                <div class="col feature_name">
+                    <p class="feature_name text-center">迷路サイズ</p>
+                </div>
+                <div class="col-8 slider_div">
+                    <div id="slider"></div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <a class="fs-6" onclick="detailSearchButtonClick()">詳しい検索へ</a>
+            </div>
+            <div class="col-12">
+                <button class="search_button fs-5" onclick="searchButtonClick()">検索</button>
+            </div>
         </div>
+
+        <!-- <div class="maze_list_links text-center">
+            <h3>各サイズの迷路一覧</h3>
+
+            <a href="./maze_list.html">迷路一覧へ</a>
+        </div> -->
 
         <div class="maze_target">
             <h3 class="text-center">対象とする迷路</h3>
@@ -58,8 +129,48 @@
                         <td>迷路を生成したアルゴリズム</td>
                     </tr>
                     <tr>
+                        <td>straight_num</td>
+                        <td>迷路全体の直線のマス数</td>
+                    </tr>
+                    <tr>
+                        <td>T_num</td>
+                        <td>迷路全体のT字路のマス数</td>
+                    </tr>
+                    <tr>
+                        <td>cross_num</td>
+                        <td>迷路全体の十字路のマス数</td>
+                    </tr>
+                    <tr>
+                        <td>turn_pos_num</td>
+                        <td>迷路全体の曲がり角のマス数</td>
+                    </tr>
+                    <tr>
+                        <td>dead_end_num</td>
+                        <td>迷路全体の行き止まりのマス数</td>
+                    </tr>
+                    <tr>
+                        <td>straight_len_log_slope</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>straight_len_std</td>
+                        <td>迷路全体の直線の長さの標準偏差</td>
+                    </tr>
+                    <tr>
+                        <td>correct_path_len</td>
+                        <td>正解の経路の長さ</td>
+                    </tr>
+                    <tr>
                         <td>turn_num</td>
-                        <td>政界の経路中の曲がり角の数</td>
+                        <td>正解の経路中の曲がり角のマス数</td>
+                    </tr>
+                    <tr>
+                        <td>boader_l</td>
+                        <td>誤道の周辺長</td>
+                    </tr>
+                    <tr>
+                        <td>neighbor_sum</td>
+                        <td>誤道の隣接数</td>
                     </tr>
                     <tr>
                         <td>L_num</td>
@@ -86,42 +197,6 @@
                         <td>スタートからゴールへ行く方向に対して右側の領域へ延びの間違った道の長さの標準偏差</td>
                     </tr>
                     <tr>
-                        <td>boader_l</td>
-                        <td>入口が異なる間違った道が隣接する長さ</td>
-                    </tr>
-                    <tr>
-                        <td>neighbor_sum</td>
-                        <td>入口が異なる間違った道が隣接する数</td>
-                    </tr>
-                    <tr>
-                        <td>correct_path_len</td>
-                        <td>正解の経路の長さ</td>
-                    </tr>
-                    <tr>
-                        <td>turn_pos_num</td>
-                        <td>迷路全体の曲がり角の数</td>
-                    </tr>
-                    <tr>
-                        <td>dead_end_num</td>
-                        <td>迷路全体の行き止まりの数</td>
-                    </tr>
-                    <tr>
-                        <td>T_num</td>
-                        <td>迷路全体のT字路の数</td>
-                    </tr>
-                    <tr>
-                        <td>cross_num</td>
-                        <td>迷路全体の十字路の数</td>
-                    </tr>
-                    <tr>
-                        <td>straight_len_std</td>
-                        <td>迷路全体の直線の長さの標準偏差</td>
-                    </tr>
-                    <tr>
-                        <td>straight_num</td>
-                        <td>迷路全体の直線の本数</td>
-                    </tr>
-                    <tr>
                         <td>goal_depth</td>
                         <td>迷路を木とした時のゴールの深さ</td>
                     </tr>
@@ -141,95 +216,71 @@
             </table>
         </div>
 
-        <div class="maze_images">
-            <div class="row row-cols-3 justify-content-evenly">
+        <div class="maze_image_cards">
+            <h3 class="text-center">迷路画像の説明</h3>
+            <div class="row row-cols-auto justify-content-evenly">
                 <div class="col">
-                    <div class="card text-center">
-                        <img src="./maze_system_imagedata/origin_maze/origin_maze_W19H19S1,1E17,17M_-0k6hXlF7Qol8S-o9B-sk1OKTXpP_.png"
-                            class="card-img-top" id="image_div">
+                    <div class="card text-center" style="width: 18rem;">
+                        <img src="./research_data/maze_images/19/origin_maze/W19H19S1,1E17,17M__-0k6hXlF7Qol8S-o9B-sk1OKTXpP__.png" class="card-img-top" id="maze_image">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
+                            <h5 class="card-title">Origin Maze</h5>
+                            <p class="card-text">道を白，壁を黒とする迷路</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-center" style="width: 18rem;">
+                        <img src="./research_data/maze_images/19/origin_maze_correctpath/W19H19S1,1E17,17M__-0k6hXlF7Qol8S-o9B-sk1OKTXpP__.png" class="card-img-top" id="maze_image">
+                        <div class="card-body">
+                            <h5 class="card-title">Origin Maze Correct Path</h5>
+                            <p class="card-text">正道を赤色で示した迷路</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-center" style="width: 18rem;">
+                        <img src="./research_data/maze_images/19/origin_maze_color/W19H19S1,1E17,17M__-0k6hXlF7Qol8S-o9B-sk1OKTXpP__.png" class="card-img-top" id="maze_image">
+                        <div class="card-body">
+                            <h5 class="card-title">Origin Maze Color</h5>
+                            <p class="card-text">正道を赤色，誤道を各色で示した迷路</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-center" style="width: 18rem;">
+                        <img src="./research_data/maze_images/19/thin_wall_maze/W19H19S1,1E17,17M__-0k6hXlF7Qol8S-o9B-sk1OKTXpP__.png" class="card-img-top" id="maze_image">
+                        <div class="card-body">
+                            <h5 class="card-title">Thin Wall Maze</h5>
+                            <p class="card-text">壁が薄い迷路</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col">
+                    <div class="card text-center" style="width: 18rem;">
+                        <img src="./research_data/maze_system_imagedata/red_arrow_maze/red_arrow_maze_W19H19S11E1717M_-0k6hXlF7Qol8S-o9B-sk1OKTXpP_.png"
+                            class="card-img-top" id="maze_image">
+                        <div class="card-body">
+                            <h5 class="card-title">Red Arrow Maze</h5>
                             <p class="card-text">説明文</p>
                         </div>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card text-center">
-                        <img src="./maze_system_imagedata/origin_maze/origin_maze_W19H19S1,1E17,17M_-0k6hXlF7Qol8S-o9B-sk1OKTXpP_.png"
-                            class="card-img-top" id="image_div">
+                    <div class="card text-center" style="width: 18rem;">
+                        <img src="./research_data/maze_system_imagedata/blue_arrow_maze/blue_arrow_maze_W19H19S11E1717M_-0k6hXlF7Qol8S-o9B-sk1OKTXpP_.png"
+                            class="card-img-top" id="maze_image">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
+                            <h5 class="card-title">Blue Arrow Maze</h5>
                             <p class="card-text">説明文</p>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="col">
-                    <div class="card text-center">
-                        <img src="./maze_system_imagedata/origin_maze/origin_maze_W19H19S1,1E17,17M_-0k6hXlF7Qol8S-o9B-sk1OKTXpP_.png"
-                            class="card-img-top" id="image_div">
+                    <div class="card text-center" style="width: 18rem;">
+                        <img src="./research_data/maze_images/19/tree_graph/W19H19S1,1E17,17M__-0k6hXlF7Qol8S-o9B-sk1OKTXpP__.png" class="card-img-top" id="maze_image" style="width: 90px; margin-left: 5rem;">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">説明文</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card text-center">
-                        <img src="./maze_system_imagedata/origin_maze/origin_maze_W19H19S1,1E17,17M_-0k6hXlF7Qol8S-o9B-sk1OKTXpP_.png"
-                            class="card-img-top" id="image_div">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">説明文</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card text-center">
-                        <img src="./maze_system_imagedata/origin_maze/origin_maze_W19H19S1,1E17,17M_-0k6hXlF7Qol8S-o9B-sk1OKTXpP_.png"
-                            class="card-img-top" id="image_div">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">説明文</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card text-center">
-                        <img src="./maze_system_imagedata/origin_maze/origin_maze_W19H19S1,1E17,17M_-0k6hXlF7Qol8S-o9B-sk1OKTXpP_.png"
-                            class="card-img-top" id="image_div">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">説明文</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card text-center">
-                        <img src="./maze_system_imagedata/origin_maze/origin_maze_W19H19S1,1E17,17M_-0k6hXlF7Qol8S-o9B-sk1OKTXpP_.png"
-                            class="card-img-top" id="image_div">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">説明文</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card text-center">
-                        <img src="./maze_system_imagedata/origin_maze/origin_maze_W19H19S1,1E17,17M_-0k6hXlF7Qol8S-o9B-sk1OKTXpP_.png"
-                            class="card-img-top" id="image_div">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">説明文</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card text-center">
-                        <img src="./maze_system_imagedata/origin_maze/origin_maze_W19H19S1,1E17,17M_-0k6hXlF7Qol8S-o9B-sk1OKTXpP_.png"
-                            class="card-img-top" id="image_div">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">説明文</p>
+                            <h5 class="card-title">Tree Graph</h5>
+                            <p class="card-text">迷路を木構造で表した画像</p>
                         </div>
                     </div>
                 </div>
@@ -242,7 +293,7 @@
             <p class="text-muted text-white">Kihara Lab. All rights reserved.</p>
         </div>
     </footer>
-    <script src="./maze_top.js"></script>
+    <script src="./js/maze_top.js"></script>
 </body>
 
 </html>

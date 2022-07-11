@@ -1,0 +1,107 @@
+{
+  "turn_num": {
+    "max": 224,
+    "min": 1,
+    "digit": 0
+  },
+  "L_num": {
+    "max": 40,
+    "min": 0,
+    "digit": 0
+  },
+  "L_size": {
+    "max": 1072,
+    "min": 0,
+    "digit": 0
+  },
+  "L_size_std": {
+    "max": 384.035,
+    "min": 0.0,
+    "digit": 3
+  },
+  "R_num": {
+    "max": 41,
+    "min": 0,
+    "digit": 0
+  },
+  "R_size": {
+    "max": 1140,
+    "min": 0,
+    "digit": 0
+  },
+  "R_size_std": {
+    "max": 294.118,
+    "min": 0.0,
+    "digit": 3
+  },
+  "boader_l": {
+    "max": 1311,
+    "min": 0,
+    "digit": 0
+  },
+  "neighbor_sum": {
+    "max": 133,
+    "min": 0,
+    "digit": 0
+  },
+  "correct_path_len": {
+    "max": 705,
+    "min": 9,
+    "digit": 0
+  },
+  "turn_pos_num": {
+    "max": 337,
+    "min": 0,
+    "digit": 0
+  },
+  "dead_end_num": {
+    "max": 235,
+    "min": 2,
+    "digit": 0
+  },
+  "T_num": {
+    "max": 166,
+    "min": 0,
+    "digit": 0
+  },
+  "cross_num": {
+    "max": 51,
+    "min": 0,
+    "digit": 0
+  },
+  "straight_len_std": {
+    "max": 5.195,
+    "min": 0.0,
+    "digit": 3
+  },
+  "straight_num": {
+    "max": 553,
+    "min": 4,
+    "digit": 0
+  },
+  "gorl_depth": {
+    "max": 704,
+    "min": 8,
+    "digit": 0
+  },
+  "depth_std": {
+    "max": 242.339,
+    "min": 0.0,
+    "digit": 3
+  },
+  "depth_max": {
+    "max": 798,
+    "min": 8,
+    "digit": 0
+  },
+  "depth_mean": {
+    "max": 463.86,
+    "min": 5.2,
+    "digit": 3
+  },
+  "straight_len_log_slope": {
+    "max": 0.331,
+    "min": -0.628,
+    "digit": 3
+  }
+}
