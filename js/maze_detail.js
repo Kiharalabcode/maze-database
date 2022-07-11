@@ -340,6 +340,22 @@ var maze_data_dict = maze_data[0]
 var maze_feature_dict = maze_data[1]
 showImages(maze_data_dict)
 
+var maze_download_a = document.getElementById("maze_download")
+var maze_file_name = "W" +
+                     maze_data_dict["W"] +
+                     "H" +
+                     maze_data_dict["H"] +
+                     "S1,1E" +
+                     maze_data_dict["endX"] +
+                     "," +
+                     maze_data_dict["endY"] +
+                     "M" +
+                     maze_data_dict["_base64_name_"] +
+                     ".txt"
+                      
+maze_download_a.setAttribute("href", "./research_data/maze_data/"+maze_feature_dict["size"]+"/"+maze_file_name)
+maze_download_a.setAttribute("download", "")
+
 showFeatureParam(maze_feature_dict)
 size_data = getSizeData(maze_feature_dict_list, maze_data_dict["size"])
 showMazeGraph(size_data, maze_feature_dict)
