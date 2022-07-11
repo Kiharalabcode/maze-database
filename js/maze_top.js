@@ -48,3 +48,48 @@ function selectRecommendAlgo() {
         }
     }
 }
+
+function searchButtonClick() {
+    var baseURL = "http://127.0.0.1:5500/maze_result.html"
+    var params_str = "?algo="
+
+    var algo_names_list = ["AldousBroder", "Division", "GrowingTree", "Kruskal", "Prims", "Sidewinder"]
+    var selected_algo = []
+    for (var i = 0; i < algo_names_list.length; i++) {
+        if (document.getElementById(algo_names_list[i]).style.display == "block") {
+            selected_algo.push(algo_names_list[i])
+        }
+    }
+
+    if (selected_algo.length == 0) {
+        params_str += algo_names_list.join(",")
+        params_str += "&"
+    } else {
+        params_str += selected_algo.join(",")
+        params_str += "&"
+    }
+
+    var _min = slider.get()[0]
+    var _max = slider.get()[1]
+    params_str += "size" + "=" + _min + "," + _max
+
+    console.log(baseURL + params_str)
+    window.location.href = baseURL + params_str
+}
+
+var size_slider = document.getElementById("slider")
+var slider = noUiSlider.create(size_slider, {
+    start: [
+        7,
+        51
+    ],
+    connect: true,
+    range: {
+        'min': 7,
+        'max': 51
+    },
+    tooltips: [
+        wNumb({ decimals: 0 }),
+        wNumb({ decimals: 0 }),
+    ],
+});
