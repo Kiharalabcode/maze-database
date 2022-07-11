@@ -6,14 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maze System</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
-        integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="./css/maze_top.css">
 </head>
 
@@ -23,11 +18,63 @@
     </header> -->
 
     <div class="container">
-        <a href="./maze_top.html" style="text-decoration: none;"><h1 class="text-center" style="margin-bottom: 100px;">Maze System</h1></a>
+        <a href="./maze_top.html" style="text-decoration: none;">
+            <h1 class="text-center" style="margin-bottom: 100px;">Maze System</h1>
+        </a>
 
-        <div class="easy_search text-center">
-            <a href="./maze_search.html">詳しい検索へ</a><br>
-            <a href="./maze_result.html">検索</a>
+        <div class="row easy_search text-center">
+            <div class="question">
+                <div class="row">
+                    <div class="col">
+                        <p class="text-center">曲がり角の数</p>
+                    </div>
+                    <div class="col">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="turn_num_radio" id="turn_num_many" value="many" onchange="selectRecommendAlgo()">
+                            <label class="form-check-label" for="turn_num_many">多い</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="turn_num_radio" id="turn_num_less" value="less" onchange="selectRecommendAlgo()">
+                            <label class="form-check-label" for="turn_num_less">少ない</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="turn_num_radio" id="turn_num_no" value="no" onchange="selectRecommendAlgo()" checked>
+                            <label class="form-check-label" for="turn_num_no">指定しない</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p class="text-center">分岐（T字路・十字路）の数</p>
+                    </div>
+                    <div class="col">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="branch_radio" id="branch_many" value="many" onchange="selectRecommendAlgo()">
+                            <label class="form-check-label" for="branch_many">多い</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="branch_radio" id="branch_less" value="less" onchange="selectRecommendAlgo()">
+                            <label class="form-check-label" for="branch_less">少ない</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="branch_radio" id="branch_no" value="no" onchange="selectRecommendAlgo()" checked>
+                            <label class="form-check-label" for="branch_no">指定しない</label>
+                        </div>
+                    </div>
+                </div>
+                <p style="margin-top: 4%;">おすすめのアルゴリズム</p>
+                <div class="row algo_list">
+                    <div class="col" id="AldousBroder" style="display: none;">AldousBroder</div>
+                    <div class="col" id="Division" style="display: none;">Division</div>
+                    <div class="col" id="GrowingTree" style="display: none;">GrowingTree</div>
+                    <div class="col" id="Kruskal" style="display: none;">Kruskal</div>
+                    <div class="col" id="Prims" style="display: none;">Prims</div>
+                    <div class="col" id="Sidewinder" style="display: none;">Sidewinder</div>
+                    <div class="col" id="no_algo">どちらかの条件を選択してください</div>
+                </div>
+            </div>
+            <div><a href="./maze_search.html">詳しい検索へ</a></div>
+            <div><a href="./maze_result.html">検索</a></div>
         </div>
 
         <!-- <div class="maze_list_links text-center">
@@ -155,8 +202,7 @@
             <div class="row row-cols-auto justify-content-evenly">
                 <div class="col">
                     <div class="card text-center" style="width: 18rem;">
-                        <img src="./research_data/maze_images/19/origin_maze/W19H19S1,1E17,17M__-0k6hXlF7Qol8S-o9B-sk1OKTXpP__.png"
-                            class="card-img-top" id="maze_image">
+                        <img src="./research_data/maze_images/19/origin_maze/W19H19S1,1E17,17M__-0k6hXlF7Qol8S-o9B-sk1OKTXpP__.png" class="card-img-top" id="maze_image">
                         <div class="card-body">
                             <h5 class="card-title">Origin Maze</h5>
                             <p class="card-text">道を白，壁を黒とする迷路</p>
@@ -165,8 +211,7 @@
                 </div>
                 <div class="col">
                     <div class="card text-center" style="width: 18rem;">
-                        <img src="./research_data/maze_images/19/origin_maze_correctpath/W19H19S1,1E17,17M__-0k6hXlF7Qol8S-o9B-sk1OKTXpP__.png"
-                            class="card-img-top" id="maze_image">
+                        <img src="./research_data/maze_images/19/origin_maze_correctpath/W19H19S1,1E17,17M__-0k6hXlF7Qol8S-o9B-sk1OKTXpP__.png" class="card-img-top" id="maze_image">
                         <div class="card-body">
                             <h5 class="card-title">Origin Maze Correct Path</h5>
                             <p class="card-text">正道を赤色で示した迷路</p>
@@ -175,8 +220,7 @@
                 </div>
                 <div class="col">
                     <div class="card text-center" style="width: 18rem;">
-                        <img src="./research_data/maze_images/19/origin_maze_color/W19H19S1,1E17,17M__-0k6hXlF7Qol8S-o9B-sk1OKTXpP__.png"
-                            class="card-img-top" id="maze_image">
+                        <img src="./research_data/maze_images/19/origin_maze_color/W19H19S1,1E17,17M__-0k6hXlF7Qol8S-o9B-sk1OKTXpP__.png" class="card-img-top" id="maze_image">
                         <div class="card-body">
                             <h5 class="card-title">Origin Maze Color</h5>
                             <p class="card-text">正道を赤色，誤道を各色で示した迷路</p>
@@ -185,8 +229,7 @@
                 </div>
                 <div class="col">
                     <div class="card text-center" style="width: 18rem;">
-                        <img src="./research_data/maze_images/19/thin_wall_maze/W19H19S1,1E17,17M__-0k6hXlF7Qol8S-o9B-sk1OKTXpP__.png"
-                            class="card-img-top" id="maze_image">
+                        <img src="./research_data/maze_images/19/thin_wall_maze/W19H19S1,1E17,17M__-0k6hXlF7Qol8S-o9B-sk1OKTXpP__.png" class="card-img-top" id="maze_image">
                         <div class="card-body">
                             <h5 class="card-title">Thin Wall Maze</h5>
                             <p class="card-text">壁が薄い迷路</p>
@@ -215,8 +258,7 @@
                 </div> -->
                 <div class="col">
                     <div class="card text-center" style="width: 18rem;">
-                        <img src="./research_data/maze_images/19/tree_graph/W19H19S1,1E17,17M__-0k6hXlF7Qol8S-o9B-sk1OKTXpP__.png"
-                            class="card-img-top" id="maze_image" style="width: 90px; margin-left: 5rem;">
+                        <img src="./research_data/maze_images/19/tree_graph/W19H19S1,1E17,17M__-0k6hXlF7Qol8S-o9B-sk1OKTXpP__.png" class="card-img-top" id="maze_image" style="width: 90px; margin-left: 5rem;">
                         <div class="card-body">
                             <h5 class="card-title">Tree Graph</h5>
                             <p class="card-text">迷路を木構造で表した画像</p>
