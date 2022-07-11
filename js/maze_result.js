@@ -262,7 +262,7 @@ function showMazeImageCard(maze_data_dict, maze_feature_dict) {
 }
 
 function searchButtonClick() {
-    var baseURL = "http://127.0.0.1:5500/maze_result.html"
+    var baseURL = "https://kiharalabcode.github.io/maze-site/maze_result.html"
     var params_str = "?algo="
 
     var algo_names_list = ["AldousBroder", "Division", "GrowingTree", "Kruskal", "Prims", "Sidewinder"]
