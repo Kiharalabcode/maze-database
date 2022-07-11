@@ -75,10 +75,19 @@ function showImages(maze_data_dict){
 }
 
 function showMazeGraph(size_data, maze_feature_dict) {
+    var feature_names = ["straight_num", "T_num", "cross_num", "turn_pos_num", "dead_end_num",
+                         /*"straight_len_log_slope",*/ "straight_len_std",
+                         "correct_path_len", "turn_num",
+                         "boader_l", "neighbor_sum",
+                         "L_num", "L_size", "L_size_std",
+                         "R_num", "R_size", "R_size_std",
+                         "gorl_depth", "depth_max", "depth_mean", "depth_std"                        
+                        ]
+
     const maze_graph_div = document.getElementById("maze_graph")
 
-    for (key in maze_feature_dict) {
-        if (key == "maze_name" || key == "size") continue
+    feature_names.forEach(function(key) {
+        // if (key == "maze_name" || key == "size") continue
 
         var graph_div = document.createElement("div")
         graph_div.classList.add("graph")
@@ -156,7 +165,7 @@ function showMazeGraph(size_data, maze_feature_dict) {
             data: data,
             options: options
         });
-    }
+    })
 }
 
 function getSizeData(maze_feature_dict_list, size) {
