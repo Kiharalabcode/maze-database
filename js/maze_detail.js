@@ -52,23 +52,23 @@ function showImages(maze_data_dict){
                           maze_data_dict["_base64_name_"] +
                           ".png"
 
-    document.getElementById("origin_maze").src = "https://kiharalabcode.github.io/maze-site/research_data/maze_images/" +
+    document.getElementById("origin_maze").src = "https://kiharalabcode.github.io/maze-database/research_data/maze_images/" +
                                                  maze_data_dict["size"] +
                                                  "/origin_maze/" +
                                                  image_file_name
-    document.getElementById("origin_maze_correctpath").src = "https://kiharalabcode.github.io/maze-site/research_data/maze_images/" +
+    document.getElementById("origin_maze_correctpath").src = "https://kiharalabcode.github.io/maze-database/research_data/maze_images/" +
                                                  maze_data_dict["size"] +
                                                  "/origin_maze_correctpath/" +
                                                  image_file_name
-    document.getElementById("origin_maze_color").src = "https://kiharalabcode.github.io/maze-site/research_data/maze_images/" +
+    document.getElementById("origin_maze_color").src = "https://kiharalabcode.github.io/maze-database/research_data/maze_images/" +
                                                  maze_data_dict["size"] +
                                                  "/origin_maze_color/" +
                                                  image_file_name
-    document.getElementById("thin_wall_maze").src = "https://kiharalabcode.github.io/maze-site/research_data/maze_images/" +
+    document.getElementById("thin_wall_maze").src = "https://kiharalabcode.github.io/maze-database/research_data/maze_images/" +
                                                  maze_data_dict["size"] +
                                                  "/thin_wall_maze/" +
                                                  image_file_name
-    document.getElementById("tree_graph").src = "https://kiharalabcode.github.io/maze-site/research_data/maze_images/" +
+    document.getElementById("tree_graph").src = "https://kiharalabcode.github.io/maze-database/research_data/maze_images/" +
                                                  maze_data_dict["size"] +
                                                  "/tree_graph/" +
                                                  image_file_name
@@ -192,6 +192,29 @@ function showFeatureParam(maze_feature_dict){
 }
 
 function showMazeGraphEachAlgo(size_data, maze_feature_dict){
+    var feature_max_min_dict = {
+        'turn_num': { 'max': 224, 'min': 1, 'digit': 0 },
+        'L_num': { 'max': 40, 'min': 0, 'digit': 0 },
+        'L_size': { 'max': 1072, 'min': 0, 'digit': 0 },
+        'L_size_std': { 'max': 384.035, 'min': 0.0, 'digit': 3 },
+        'R_num': { 'max': 41, 'min': 0, 'digit': 0 },
+        'R_size': { 'max': 1140, 'min': 0, 'digit': 0 },
+        'R_size_std': { 'max': 294.118, 'min': 0.0, 'digit': 3 },
+        'boader_l': { 'max': 1311, 'min': 0, 'digit': 0 },
+        'neighbor_sum': { 'max': 133, 'min': 0, 'digit': 0 },
+        'correct_path_len': { 'max': 705, 'min': 9, 'digit': 0 },
+        'turn_pos_num': { 'max': 337, 'min': 0, 'digit': 0 },
+        'dead_end_num': { 'max': 235, 'min': 2, 'digit': 0 },
+        'T_num': { 'max': 166, 'min': 0, 'digit': 0 },
+        'cross_num': { 'max': 51, 'min': 0, 'digit': 0 },
+        'straight_len_std': { 'max': 5.195, 'min': 0.0, 'digit': 3 },
+        'straight_num': { 'max': 553, 'min': 4, 'digit': 0 },
+        'gorl_depth': { 'max': 704, 'min': 8, 'digit': 0 },
+        'depth_std': { 'max': 242.339, 'min': 0.0, 'digit': 3 },
+        'depth_max': { 'max': 798, 'min': 8, 'digit': 0 },
+        'depth_mean': { 'max': 463.86, 'min': 5.2, 'digit': 3 },
+        'straight_len_log_slope': { 'max': 0.331, 'min': -0.628, 'digit': 3 }
+    }
     var algo_names = ["AldousBroder", "Division", "GrowingTree", "Kruskal", "Prims", "Sidewinder"]
     const algo_maze_graph_div = document.getElementById("algo_maze_graph")
 
@@ -248,8 +271,6 @@ function showMazeGraphEachAlgo(size_data, maze_feature_dict){
             row_div.appendChild(graph_canvas)
 
             var algo_data = getAlgoData(size_data, algo_names[i])
-            console.log(algo_names[i])
-            console.log(algo_data.length)
 
             var count = {};
             arr = algo_data.map(row => Math.round(Number(row[key])))
@@ -291,7 +312,11 @@ function showMazeGraphEachAlgo(size_data, maze_feature_dict){
                     x: {
                         display: true,
                         grid: {
-                            offset: false
+                            offset: false,
+                            ticks: {
+                                max: feature_max_min_dict[key]["max"],
+                                min: feature_max_min_dict[key]["min"]
+                            }
                         }
                     },
                     y: {
@@ -327,9 +352,9 @@ function showMazeGraphEachAlgo(size_data, maze_feature_dict){
     }
 }
 
-maze_data_dict_list = readCsvToDict("https://raw.githubusercontent.com/Kiharalabcode/maze-site/main/research_data/maze_data.csv")
+maze_data_dict_list = readCsvToDict("https://raw.githubusercontent.com/Kiharalabcode/maze-database/main/research_data/maze_data.csv")
 //console.log(maze_data_dict_list)
-maze_feature_dict_list = readCsvToDict("https://raw.githubusercontent.com/Kiharalabcode/maze-site/main/research_data/MasterMazeData_features_df.csv")
+maze_feature_dict_list = readCsvToDict("https://raw.githubusercontent.com/Kiharalabcode/maze-database/main/research_data/MasterMazeData_features_df.csv")
 //console.log(maze_feature_dict_list)
 
 var unique_name = getURLParam()

@@ -203,7 +203,7 @@ function showMazeImageCard(maze_data_dict, maze_feature_dict) {
 
             maze_img_a = document.createElement("a")
             maze_img_a.setAttribute('href',
-                "https://kiharalabcode.github.io/maze-site/maze_detail.html?uniquename=" + maze_data["_base64_name_"]
+                "https://kiharalabcode.github.io/maze-database/maze_detail.html?uniquename=" + maze_data["_base64_name_"]
             )
             maze_img_a.setAttribute("target", "_blank")
             maze_img = document.createElement("img")
@@ -218,7 +218,7 @@ function showMazeImageCard(maze_data_dict, maze_feature_dict) {
                 "M" +
                 maze_data["_base64_name_"]
             if (i <= 50) {
-                maze_img.src = "https://kiharalabcode.github.io/maze-site/research_data/maze_images/" +
+                maze_img.src = "https://kiharalabcode.github.io/maze-database/research_data/maze_images/" +
                     maze_data["size"] +
                     "/origin_maze/" +
                     image_name +
@@ -226,7 +226,7 @@ function showMazeImageCard(maze_data_dict, maze_feature_dict) {
             } else {
                 // maze_img.src = "dummy.png"
                 maze_img.setAttribute("data-src",
-                    "https://kiharalabcode.github.io/maze-site/research_data/maze_images/" +
+                    "https://kiharalabcode.github.io/maze-database/research_data/maze_images/" +
                     maze_data["size"] +
                     "/origin_maze/" +
                     image_name +
@@ -262,7 +262,7 @@ function showMazeImageCard(maze_data_dict, maze_feature_dict) {
 }
 
 function searchButtonClick() {
-    var baseURL = "https://kiharalabcode.github.io/maze-site/maze_result.html"
+    var baseURL = "https://kiharalabcode.github.io/maze-database/maze_result.html"
     var params_str = "?algo="
 
     var algo_names_list = ["AldousBroder", "Division", "GrowingTree", "Kruskal", "Prims", "Sidewinder"]
@@ -295,9 +295,9 @@ function initAlgoCheckBox() {
 initAlgoCheckBox()
 createSizeSlider()
 createSearchBox()
-maze_data_dict = readCsvToDict("https://raw.githubusercontent.com/Kiharalabcode/maze-site/main/research_data/maze_data.csv")
+maze_data_dict = readCsvToDict("https://raw.githubusercontent.com/Kiharalabcode/maze-database/main/research_data/maze_data.csv")
     //console.log(maze_data_dict)
-maze_feature_dict = readCsvToDict("https://raw.githubusercontent.com/Kiharalabcode/maze-site/main/research_data/MasterMazeData_features_df.csv")
+maze_feature_dict = readCsvToDict("https://raw.githubusercontent.com/Kiharalabcode/maze-database/main/research_data/MasterMazeData_features_df.csv")
     //console.log(maze_feature_dict)
 
 showMazeImageCard(maze_data_dict, maze_feature_dict)

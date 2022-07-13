@@ -158,7 +158,7 @@ createSizeSlider()
 createSearchBox()
 
 function searchButtonClick() {
-    var baseURL = "https://kiharalabcode.github.io/maze-site/maze_result.html"
+    var baseURL = "https://kiharalabcode.github.io/maze-database/maze_result.html"
     var params_str = "?algo="
 
     var algo_names_list = ["AldousBroder", "Division", "GrowingTree", "Kruskal", "Prims", "Sidewinder"]
