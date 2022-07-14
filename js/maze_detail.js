@@ -76,7 +76,7 @@ function showImages(maze_data_dict){
 
 function showMazeGraph(size_data, maze_feature_dict) {
     var feature_names = ["straight_num", "T_num", "cross_num", "turn_pos_num", "dead_end_num",
-                         /*"straight_len_log_slope",*/ "straight_len_std",
+                         "straight_len_log_slope", "straight_len_std",
                          "correct_path_len", "turn_num",
                          "boader_l", "neighbor_sum",
                          "L_num", "L_size", "L_size_std",
