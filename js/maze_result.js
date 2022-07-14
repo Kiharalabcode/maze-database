@@ -1,6 +1,6 @@
 var column_names_jp = {
     "1次的な特徴量": ["直線のマス数", "T字路のマス数", "十字路のマス数", "曲がり角のマス数", "行き止まりのマス数"],
-    "2次的な特徴量": [ /*"直線の長さ",*/ "直線の長さの標準偏差",
+    "2次的な特徴量": [ "直線の長さ", "直線の長さの標準偏差",
         "正道の経路の長さ", "正道の曲がり角のマス数",
         "誤道の周辺長", "誤道の隣接数",
         "L領域の誤道数", "L領域の総経路長", "L領域の経路の標準偏差",
@@ -10,7 +10,7 @@ var column_names_jp = {
 }
 var column_names_en = {
     "1次的な特徴量": ["straight_num", "T_num", "cross_num", "turn_pos_num", "dead_end_num"],
-    "2次的な特徴量": [ /*"straight_len_log_slope",*/ "straight_len_std",
+    "2次的な特徴量": [ "straight_len_log_slope", "straight_len_std",
         "correct_path_len", "turn_num",
         "boader_l", "neighbor_sum",
         "L_num", "L_size", "L_size_std",
